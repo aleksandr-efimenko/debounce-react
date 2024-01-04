@@ -63,6 +63,9 @@ export default function App() {
       </div>
       <div className='h-64'>
         {{ searchResultEmpty } && <ul className='text-left list-disc list-inside text-lg'>{searchResultList}</ul>}
+        {searchResultEmpty && searchTerm.length > 0 && !debounceTimeout.current && (
+          <div className='text-lg animate-pulse'>No results found</div>
+        )}
       </div>
     </div>
   )
