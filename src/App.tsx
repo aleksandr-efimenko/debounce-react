@@ -39,18 +39,23 @@ export default function App() {
 
   const searchResultEmpty = searchResult?.length === 0
   // get first 20 results
-  const searchResultList = searchResult.slice(0, 20).map((c) => <li>{c}</li>)
+  const searchResultList = searchResult.slice(0, 10).map((c) => <li key={c}>{c}</li>)
   return (
-    <div>
-      <label htmlFor='search-input'>Search:</label>
-      <input
-        type='text'
-        id='search-input'
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder='Type to search...'
-      />
-      {{ searchResultEmpty } && <ul>{searchResultList}</ul>}
+    <div className='flex'>
+      <div className='flex gap-5 items-center'>
+        <label htmlFor='search-input' className='text-xl'>
+          Search:
+        </label>
+        <input
+          className='border-2 border-gray-300 rounded-md px-3 py-2 text-lg'
+          type='text'
+          id='search-input'
+          value={searchTerm}
+          onChange={handleInputChange}
+          placeholder='Type to search...'
+        />
+      </div>
+      {{ searchResultEmpty } && <ul className='list-disc '>{searchResultList}</ul>}
     </div>
   )
 }
