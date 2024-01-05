@@ -40,14 +40,18 @@ export default function App() {
     setSearchTerm(value)
     debouncedSearch(value)
   }
-
+  const delayMessage = (
+    <>
+      <p>Delay in effect while typing... </p> <p>Search will run after 1 second of inactivity.</p>
+    </>
+  )
   const searchResultEmpty = searchResult?.length === 0
   // get first 20 results
   const searchResultList = searchResult.slice(0, 10).map((c) => <li key={c}>{c}</li>)
   return (
     <div className='flex flex-col gap-5'>
-      <div className='h-12'>{debounceTimeout.current && 'Wait until the search function is executed'}</div>
-      <div className='flex gap-5 items-center'>
+      <div className='h-12'>{debounceTimeout.current && delayMessage}</div>
+      <div className='flex gap-5 items-center h-24'>
         <label htmlFor='search-input' className='text-xl'>
           Search:
         </label>

@@ -1,30 +1,17 @@
-# React + TypeScript + Vite
+## React Debounce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the code for the article [How to use Debounce in React](https://dev.to/alexefimenko/how-to-use-debounce-in-react-1k9j).
 
-Currently, two official plugins are available:
+### How to run the code
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository
+2. Run `npm install`
+3. Run `npm run dev`
 
-## Expanding the ESLint configuration
+### How to use Debounce in React
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The problem we are trying to solve is that we want to make an API call to search for a user after the user has stopped typing for 1s (in real life, it would be more like 300ms). It will make the API calls more efficient and reduce the load on the server. Here we do not use API calls, but we will simulate the delay with a setTimeout function.
 
-- Configure the top-level `parserOptions` property like this:
+We will use the debounce function from my article [Let’s implement a Debounce function in Javascript](https://dev.to/alexefimenko/lets-implement-a-debounce-function-in-javascript-1ij1). But we will need to adjust it a bit to use it in a React component.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The main problem to use the debounce function in React is that we need to store the timer ID between renders. If we just use a useState hook, the timer ID will be reset on every render. So for this, we will use the useRef hook as it is [recommended by the React team](https://react.dev/reference/react/useRef#referencing-a-value-with-a-ref).
